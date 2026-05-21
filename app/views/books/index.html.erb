@@ -1,2 +1,12 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
+<% @books.each do |book| %>
+  <div>
+    <%# book_path(book.id) で詳細画面へリンクし、その中に画像を入れる %>
+    <%= link_to book_path(book.id) do %>
+      <%= image_tag book.get_image.variant(resize_to_limit: [100, 100]) %>
+    <% end %>
+
+    <p>タイトル：<%= book.title %></p>
+    <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+    <p>ユーザーネーム：<%= book.user.name %></p>
+  </div>
+<% end %>
