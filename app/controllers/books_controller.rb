@@ -5,9 +5,12 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.user_id = Current.user.id
-    @book.save
-    redirect_to books_path
+    if @book.save
+    # 成功したら詳細画面(show)へリダイレクト
+      redirect_to book_path(@book.id), notice: '投稿が完了しました！'
+    else
+      render :new
+    end
   end
 
   def index
